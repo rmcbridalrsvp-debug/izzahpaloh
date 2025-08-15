@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Izzah & Hafizan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- GOLD & BEIGE COLOR SCHEME --- */
+        :root {
+            --bg-color: #FBF5E8;      /* Creamy Beige */
+            --primary-color: #C1A36F; /* Gold/Tan */
+            --text-color: #4A3F35;    /* Dark Brown */
+            --light-border: #EAE0CC;
+        }
+
+        /* Basic Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Particle Canvas Styling */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Scroll Animation Styling */
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-top: 60px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        /* Header Image Styling */
+        .header-image {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Main container for the invitation content */
+        .invitation-container {
+            padding: 20px 20px 120px 20px;
+            position: relative;
+            max-width: 550px;
+            margin: 20px auto;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Bismillah text styling */
+        .bismillah {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        /* Styling for names */
+        .names {
+            font-family: 'Lora', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .names .ampersand {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 5px 0;
+        }
+
+        /* Invitation text styling */
+        .invitation-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 30px auto;
+            max-width: 80%;
+        }
+        
+        /* Main Title Styling */
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--text-color);
+        }
+
+        /* Couple's names styling */
+        .couple-names {
+            font-family: 'Lora', serif;
+            font-size: 2.0rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text-color);
+            margin-top: 40px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .couple-names .ampersand {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin: 10px 0;
+        }
+		
+        /* Countdown Timer Styling */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px auto;
+            max-width: 500px;
+        }
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--light-border);
+            border-radius: 8px;
+            padding: 10px 15px;
+            min-width: 60px;
+        }
+        .countdown-item span {
+            display: block;
+            font-family: 'Lora', serif;
+        }
+        .countdown-item span:first-child {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        .countdown-item span:last-child {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Event Details Section */
+        .event-details {
+            margin: 50px auto 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 30px 20px;
+            border-top: 1px solid var(--light-border);
+            border-bottom: 1px solid var(--light-border);
+            max-width: 500px;
+        }
+        .detail-item h3 {
+            font-family: 'Lora', serif;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .detail-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Music Control Button */
+        #music-control {
+            position: fixed;
+            bottom: 80px;
+            right: 15px;
+            background-color: rgba(74, 63, 53, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        /* Bottom navigation bar styling */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            z-index: 999;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        /* RSVP Form Styling */
+        .rsvp-form {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+        .rsvp-form h3 {
+            text-align: center;
+            font-family: 'Lora', serif;
+            color: var(--text-color);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .form-group input:disabled {
+            background-color: #f2f2f2;
+            cursor: not-allowed;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #b18f5a;
+        }
+        .form-group button:disabled {
+            background-color: #ccc;
+            cursor: wait;
+        }
+        .success-message, .error-message {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success-message {
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+            background-color: #e8f5e9;
+        }
+        .error-message {
+            color: #c62828;
+            border: 1px solid #c62828;
+            background-color: #ffebee;
+        }
+
+        /* Wishes (Ucapan) Section Styling */
+        .wishes-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .wish-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            text-align: left;
+        }
+        .wish-item:last-child {
+            border-bottom: none;
+        }
+        .wish-item .wisher-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        .wish-item .wish-text {
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.85rem;
+        }
+
+        /* Modal (popup) styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 40% auto;
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            animation: slideIn 0.4s;
+        }
+        .modal-content h2 {
+            font-family: 'Lora', serif;
+            color: var(--text-color);
+            margin-top: 0;
+        }
+        .contact-person p { margin: 5px 0; }
+        .contact-person a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-button:hover, .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .action-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .action-buttons a:hover { background-color: #b18f5a; }
+        .action-buttons a i { margin-right: 10px; font-size: 1.2rem; }
+
+        @keyframes fadeIn {
+            from {opacity: 0;} to {opacity: 1;}
+        }
+        @keyframes slideIn {
+            from {transform: translateY(-50px); opacity: 0;} to {transform: translateY(0); opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    
+    <canvas id="particle-canvas"></canvas>
+
+    <img src="izzahpaloh.png" alt="Wedding Itinerary" class="header-image fade-in-element" onerror="this.style.display='none'">
+
+    <div class="invitation-container">
+        <div class="bismillah fade-in-element">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+        <div class="main-title fade-in-element">Majlis Kesyukuran Perkahwinan</div>
+        
+        <div class="names fade-in-element">Dato’ Baidzawi Che Mat<br><span class="ampersand">&</span><br>To’ Puan Fadhilah Mustafa</div>
+        <div class="invitation-text fade-in-element">Dengan penuh kesyukuran, kami mempersilakan<br>Tan Sri | Puan Sri | Dato' | Datin | Tuan | Puan | Encik | Cik<br>hadir ke majlis kesyukuran perkahwinan puteri kami</div>
+
+        <div class="couple-names fade-in-element">Nurul Izzah Baidzawi<br><span class="ampersand">&</span><br>Muhammad Hafizan Muda</div>
+
+        <!-- Countdown Timer -->
+        <div id="countdown" class="countdown-container fade-in-element">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <span>Hari</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <span>Jam</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <span>Minit</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <span>Saat</span>
+            </div>
+        </div>
+
+        <div class="event-details fade-in-element">
+            <div class="detail-item">
+                <h3>Tarikh & Masa</h3>
+                <p>04 Oktober 2025 (Sabtu)</p>
+                <p>bersamaan 12 Rabiulakhir 1447H</p>
+            </div>
+			<div class="detail-item">
+                <h3>Masa</h3>
+                <p>11:00 Pagi - 4:00 Petang</p>
+            </div>
+            <div class="detail-item">
+                <h3>Lokasi</h3>
+                <p>D 103 Lorong Harmoni, Kampung Paloh,</p>
+                <p>20050 Kuala Terengganu, Terengganu</p>
+            </div>
+        </div>
+        
+		<img src="aturcara.png" alt="Wedding Itinerary" class="header-image fade-in-element" onerror="this.style.display='none'">
+		
+        <div id="rsvp" class="rsvp-form fade-in-element">
+            <!-- This section will be populated by JavaScript -->
+        </div>
+
+        <!-- Wishes Display Section -->
+        <div class="wishes-container fade-in-element">
+            <h2 class="section-title">Ucapan & Doa</h2>
+            <div id="wishes-list">
+                 <p>Loading wishes...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom-nav">
+        <a id="calendarBtn" class="nav-item"><i class="fa-regular fa-calendar-days"></i><span>Kalendar</span></a>
+        <a id="contactBtn" class="nav-item"><i class="fa-solid fa-phone"></i><span>Hubungi</span></a>
+        <a id="locationBtn" class="nav-item"><i class="fa-solid fa-location-dot"></i><span>Lokasi</span></a>
+        <a href="#rsvp" class="nav-item"><i class="fa-regular fa-envelope"></i><span>RSVP</span></a>
+    </div>
+
+    <!-- Audio Player and Control Button -->
+    <audio id="background-music" loop>
+        <source src="izzah.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <button id="music-control"><i class="fas fa-volume-mute"></i></button>
+
+
+    <div id="calendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeCalendar">×</span>
+            <h2>Simpan Tarikh</h2>
+            <p>04 Oktober 2025</p>
+			<p>11:00 Pagi - 4:00 Petang</p>
+            <div class="action-buttons">
+                <a id="appleCalendarLink" href="#" download="wedding_Izzah_Hafizan.ics"><i class="fab fa-apple"></i> Apple Calendar</a>
+                <a id="googleCalendarLink" href="#" target="_blank"><i class="fab fa-google"></i> Google Calendar</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeContact">×</span>
+            <h2>Hubungi Kami</h2>
+            <div class="contact-person"><p><strong>Keluarga Pengantin</strong></p><p>Dato': <a href="tel:+60129880234">012-9880234</a></p><p>To'Puan: <a href="tel:+60122782234">012-2782234</a></p><p>Izzah: <a href="tel:+60123808354">012-3808354</a></p></div>
+        </div>
+    </div>
+
+    <div id="locationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="closeLocation">×</span>
+            <h2>Lokasi Majlis</h2>
+            <p>D 103 Lorong Harmoni, Kampung Paloh, 20050 Kuala Terengganu</p>
+            <div class="action-buttons">
+                <!-- UPDATED: New Google Maps and Waze links -->
+                <a href="https://www.google.com/maps/search/?api=1&query=5.3132386,103.0973511" target="_blank"><i class="fas fa-map-marked-alt"></i> Google Maps</a>
+                <a href="waze://?ll=5.3132386,103.0973511&navigate=yes" target="_blank"><i class="fab fa-waze"></i> Waze</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            
+            // --- Particle Effect ---
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+
+            function startParticles() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                particlesArray = [];
+                const numberOfParticles = (canvas.height * canvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .4) - .2;
+                    let directionY = (Math.random() * .4) - .2;
+                    let color = 'rgba(193, 163, 111, 0.5)'; // Particle color to match new theme
+                    particlesArray.push({x, y, directionX, directionY, size, color});
+                }
+            }
+
+            function animateParticles() {
+                requestAnimationFrame(animateParticles);
+                ctx.clearRect(0,0,innerWidth, innerHeight);
+
+                for (let i = 0; i < particlesArray.length; i++) {
+                    let particle = particlesArray[i];
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2, false);
+                    ctx.fillStyle = particle.color;
+                    ctx.fill();
+
+                    if (particle.x + particle.size > canvas.width || particle.x - particle.size < 0) {
+                        particle.directionX = -particle.directionX;
+                    }
+                    if (particle.y + particle.size > canvas.height || particle.y - particle.size < 0) {
+                        particle.directionY = -particle.directionY;
+                    }
+                    particle.x += particle.directionX;
+                    particle.y += particle.directionY;
+                }
+            }
+
+
+            // --- Countdown Timer ---
+            function startCountdown() {
+                const countdownDate = new Date("October 4, 2025 11:00:00").getTime();
+
+                const interval = setInterval(function() {
+                    const now = new Date().getTime();
+                    const distance = countdownDate - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                    document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                    document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                    document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        document.getElementById("countdown").innerHTML = "<h3>The day is here!</h3>";
+                    }
+                }, 1000);
+            }
+
+            // --- Music Player Logic ---
+            const music = document.getElementById('background-music');
+            const musicControl = document.getElementById('music-control');
+
+            function playMusicOnFirstInteraction() {
+                music.play().then(() => {
+                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                }).catch(error => {
+                    console.error("Music play failed:", error);
+                });
+            }
+
+            document.body.addEventListener('click', playMusicOnFirstInteraction, { once: true });
+            document.body.addEventListener('touchstart', playMusicOnFirstInteraction, { once: true });
+
+            musicControl.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                if (music.paused) {
+                    music.play();
+                    musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    music.pause();
+                    musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            });
+
+
+            // --- Modal Setup ---
+            function setupModal(modalId, buttonId, closeButtonId) {
+                const modal = document.getElementById(modalId);
+                const btn = document.getElementById(buttonId);
+                const span = document.getElementById(closeButtonId);
+
+                if (modal && btn && span) {
+                    btn.onclick = function() { modal.style.display = "block"; }
+                    span.onclick = function() { modal.style.display = "none"; }
+                }
+            }
+            
+            setupModal('contactModal', 'contactBtn', 'closeContact');
+            setupModal('calendarModal', 'calendarBtn', 'closeCalendar');
+            setupModal('locationModal', 'locationBtn', 'closeLocation');
+            
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = "none";
+                }
+            }
+
+            // --- Calendar Links Generation ---
+            function generateCalendarLinks() {
+                const title = "Majlis Kesyukuran Perkahwinan Izzah & Hafizan";
+                const description = "Majlis Kesyukuran Perkahwinan Nurul Izzah Binti Dato' Baidzawi & Muhammad Hafizan Bin Muda.";
+                const location = "D 103 Lorong Harmoni, Kampung Paloh, 20050 Kuala Terengganu, Terengganu";
+                const startDate = "20251004T110000";
+                const endDate = "20251004T160000";
+                const timezone = "Asia/Kuala_Lumpur";
+
+                // Apple Calendar (.ics)
+                const icsContent = [
+                    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//RMCCreation//NONSGML v1.0//EN",
+                    "BEGIN:VEVENT",
+                    "UID:" + new Date().getTime() + "@yourdomain.com",
+                    "DTSTAMP:" + new Date().toISOString().replace(/[-:.]/g, "") + "Z",
+                    "DTSTART;TZID=" + timezone + ":" + startDate,
+                    "DTEND;TZID=" + timezone + ":" + endDate,
+                    "SUMMARY:" + title, "DESCRIPTION:" + description, "LOCATION:" + location,
+                    "END:VEVENT", "END:VCALENDAR"
+                ].join("\r\n");
+                document.getElementById('appleCalendarLink').href = 'data:text/calendar;charset=utf8,' + encodeURIComponent(icsContent);
+
+                // Google Calendar
+                const googleUrl = new URL("https://www.google.com/calendar/render");
+                googleUrl.searchParams.append("action", "TEMPLATE");
+                googleUrl.searchParams.append("text", title);
+                googleUrl.searchParams.append("dates", `${startDate}/${endDate}`);
+                googleUrl.searchParams.append("details", description);
+                googleUrl.searchParams.append("location", location);
+                googleUrl.searchParams.append("ctz", timezone);
+                document.getElementById('googleCalendarLink').href = googleUrl.toString();
+            }
+
+            // --- RSVP & Wishes Logic ---
+            const rsvpContainer = document.getElementById('rsvp');
+            const wishesListContainer = document.getElementById('wishes-list');
+            const submitFunctionUrl = '/.netlify/functions/submit-rsvp';
+            const getWishesFunctionUrl = '/.netlify/functions/get-wishes';
+
+            async function fetchAndDisplayWishes() {
+                try {
+                    const response = await fetch(getWishesFunctionUrl);
+                    if (!response.ok) throw new Error('Failed to fetch wishes');
+                    const wishes = await response.json();
+                    
+                    wishesListContainer.innerHTML = '';
+                    if (wishes && wishes.length > 0) {
+                        wishes.slice().reverse().forEach(wish => {
+                            const wishItem = document.createElement('div');
+                            wishItem.className = 'wish-item';
+                            wishItem.innerHTML = `
+                                <p class="wisher-name">${wish.name}</p>
+                                <p class="wish-text">"${wish.ucapan}"</p>
+                            `;
+                            wishesListContainer.appendChild(wishItem);
+                        });
+                    } else {
+                        wishesListContainer.innerHTML = "<p>Tiada ucapan lagi. Jadilah yang pertama!</p>";
+                    }
+                } catch (error) {
+                    console.error('Error fetching wishes:', error);
+                    wishesListContainer.innerHTML = "<p>Could not load wishes at this time.</p>";
+                }
+            }
+
+            function displayRsvpForm() {
+                rsvpContainer.innerHTML = `
+                    <h3>Pengesahan Kehadiran & Ucapan</h3>
+                    <div id="form-message"></div>
+                    <form id="rsvp-form">
+                        <div class="form-group"><label for="name">Nama Penuh</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="attendance">Kehadiran</label><select id="attendance" name="attendance" required><option value="">-- Sila Pilih --</option><option value="Hadir">Hadir</option><option value="Tidak Hadir">Tidak Hadir</option></select></div>
+                        <div class="form-group"><label for="guests">Bilangan Tetamu (Termasuk Anda)</label><input type="number" id="guests" name="guests" min="1" value="1" required></div>
+                        <div class="form-group"><label for="ucapan">Ucapan & Doa</label><textarea id="ucapan" name="ucapan" placeholder="Tinggalkan ucapan anda di sini..."></textarea></div>
+                        <div class="form-group"><button type="submit" id="submit-button">Hantar</button></div>
+                    </form>
+                `;
+                
+                const rsvpForm = document.getElementById('rsvp-form');
+                const attendanceSelect = document.getElementById('attendance');
+                const guestsInput = document.getElementById('guests');
+
+                attendanceSelect.addEventListener('change', function() {
+                    if (this.value === 'Tidak Hadir') {
+                        guestsInput.value = '0';
+                        guestsInput.disabled = true;
+                        guestsInput.required = false;
+                    } else {
+                        guestsInput.value = '1';
+                        guestsInput.disabled = false;
+                        guestsInput.required = true;
+                    }
+                });
+
+                rsvpForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const formMessage = document.getElementById('form-message');
+                    const submitButton = document.getElementById('submit-button');
+                    
+                    formMessage.innerHTML = '';
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Menghantar...';
+
+                    const formData = {
+                        name: document.getElementById('name').value.trim(),
+                        attendance: attendanceSelect.value,
+                        guests: guestsInput.value,
+                        ucapan: document.getElementById('ucapan').value.trim()
+                    };
+
+                    if (!formData.name || !formData.attendance) {
+                        formMessage.innerHTML = `<p class="error-message">Sila isi semua ruangan yang diperlukan.</p>`;
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Hantar';
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(submitFunctionUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+
+                        if (response.ok) {
+                            rsvpContainer.innerHTML = `<p class="success-message">Terima kasih! RSVP dan ucapan anda telah diterima.</p>`;
+                            fetchAndDisplayWishes();
+                        } else {
+                            const errorResult = await response.json();
+                            throw new Error(errorResult.error || 'An error occurred.');
+                        }
+                    } catch (error) {
+                        console.error('Submission failed:', error);
+                        formMessage.innerHTML = `<p class="error-message">Maaf, terdapat ralat semasa menghantar RSVP anda. Sila cuba lagi.</p>`;
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Hantar';
+                    }
+                });
+            }
+
+            // --- Scroll Animation Logic ---
+            function setupScrollAnimation() {
+                const elements = document.querySelectorAll('.fade-in-element');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                elements.forEach(element => {
+                    observer.observe(element);
+                });
+            }
+
+
+            // --- Initial Page Load ---
+            startParticles();
+            animateParticles();
+            startCountdown();
+            setupScrollAnimation();
+            window.addEventListener('resize', startParticles);
+            generateCalendarLinks();
+            displayRsvpForm();
+            fetchAndDisplayWishes();
+        });
+    </script>
+</body>
+</html>
