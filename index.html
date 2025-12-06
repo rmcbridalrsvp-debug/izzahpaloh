@@ -10,18 +10,21 @@
     <meta property="og:title" content="Majlis Perkahwinan | Ainaa & Hisyamudin - 23 Mac 2026 (Isnin)">
     <meta property="og:description" content="Tekan pautan untuk lihat jemputan">
     <meta property="og:image" content="https://izzahrsvppaloh.netlify.app/images/jemputan_thumbnail.png">
-	
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- GOLD & BEIGE COLOR SCHEME --- */
+        /* --- BLACK & GOLD THEME --- */
         :root {
-            --bg-color: #FBF5E8;      /* Creamy Beige */
-            --primary-color: #C1A36F; /* Gold/Tan */
-            --text-color: #4A3F35;    /* Dark Brown */
-            --light-border: #EAE0CC;
+            --bg-color: #111111;       /* Deep Black */
+            --primary-color: #D4AF37;  /* Metallic Gold */
+            --text-color: #F4F4F4;     /* Off-White for readability */
+            --muted-text: #B0B0B0;     /* Grey for secondary text */
+            --card-bg: #1A1A1A;        /* Dark Grey for cards */
+            --input-bg: #222222;       /* Very dark grey for inputs */
+            --border-color: #333333;   /* Subtle border */
         }
 
         /* Basic Styling */
@@ -33,6 +36,9 @@
             color: var(--text-color);
             text-align: center;
             overflow-x: hidden;
+            /* Scrollbar styling for dark mode */
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--bg-color);
         }
 
         /* Particle Canvas Styling */
@@ -44,13 +50,14 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); /* Subtle vignette */
         }
         
         /* Scroll Animation Styling */
         .fade-in-element {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         .fade-in-element.is-visible {
             opacity: 1;
@@ -61,10 +68,12 @@
             font-family: 'Lora', serif;
             font-size: 1.8rem;
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--primary-color);
             margin-top: 60px;
             margin-bottom: 20px;
             text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         /* Header Image Styling */
@@ -74,18 +83,21 @@
             display: block;
             margin: 20px auto;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2); /* Gold glow */
+            border: 1px solid #333;
         }
 
-        /* Main container for the invitation content */
+        /* Main container */
         .invitation-container {
-            padding: 20px 20px 120px 20px;
+            padding: 30px 20px 120px 20px;
             position: relative;
             max-width: 550px;
             margin: 20px auto;
-            border: 2px solid var(--primary-color);
+            border: 1px solid var(--primary-color);
             border-radius: 30px;
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.03); /* Glassmorphism effect */
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
         }
         
         /* Bismillah text styling */
@@ -93,89 +105,100 @@
             font-family: 'Lora', serif;
             font-size: 1.5rem;
             margin-bottom: 30px;
+            color: var(--primary-color);
         }
 
         /* Styling for names */
         .names {
             font-family: 'Lora', serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 600;
             line-height: 1.4;
             margin-bottom: 20px;
+            color: var(--text-color);
         }
 
         .names .ampersand {
             font-family: 'Lora', serif;
             font-size: 1.2rem;
             font-weight: 400;
+            color: var(--primary-color);
             margin: 5px 0;
         }
 
         /* Invitation text styling */
         .invitation-text {
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.8;
             margin: 30px auto;
-            max-width: 80%;
+            max-width: 90%;
+            color: var(--muted-text);
+            font-weight: 300;
         }
         
         /* Main Title Styling */
         .main-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 1rem;
-            letter-spacing: 2px;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 25px;
-            color: var(--text-color);
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
         /* Couple's names styling */
         .couple-names {
             font-family: 'Lora', serif;
-            font-size: 2.0rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            line-height: 1.4;
-            color: var(--text-color);
+            line-height: 1.3;
+            color: var(--primary-color);
             margin-top: 40px;
-            margin-left: auto;
-            margin-right: auto;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
         .couple-names .ampersand {
             font-size: 1.8rem;
             font-weight: 400;
-            margin: 10px 0;
+            margin: 15px 0;
+            color: var(--text-color);
         }
-		
+        
         /* Countdown Timer Styling */
         .countdown-container {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin: 40px auto;
+            margin: 50px auto;
             max-width: 500px;
         }
         .countdown-item {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid var(--light-border);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--primary-color);
             border-radius: 8px;
-            padding: 10px 15px;
-            min-width: 60px;
+            padding: 10px 5px;
+            min-width: 65px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
         .countdown-item span {
             display: block;
             font-family: 'Lora', serif;
         }
         .countdown-item span:first-child {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: var(--text-color);
+            color: var(--primary-color);
         }
         .countdown-item span:last-child {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--muted-text);
+            margin-top: 5px;
         }
         
         /* Event Details Section */
@@ -185,23 +208,25 @@
             flex-direction: column;
             gap: 25px;
             padding: 30px 20px;
-            border-top: 1px solid var(--light-border);
-            border-bottom: 1px solid var(--light-border);
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
             max-width: 500px;
+            background-color: rgba(0,0,0,0.2);
         }
         .detail-item h3 {
             font-family: 'Lora', serif;
             font-weight: 600;
-            color: var(--text-color);
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
         .detail-item p {
             margin: 0;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-color);
         }
 
         /* Music Control Button */
@@ -209,9 +234,9 @@
             position: fixed;
             bottom: 80px;
             right: 15px;
-            background-color: rgba(74, 63, 53, 0.8);
-            color: white;
-            border: none;
+            background-color: var(--primary-color);
+            color: #000;
+            border: 2px solid #fff;
             border-radius: 50%;
             width: 45px;
             height: 45px;
@@ -220,9 +245,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
             z-index: 1000;
+            transition: transform 0.2s;
         }
+        #music-control:active { transform: scale(0.9); }
 
         /* Bottom navigation bar styling */
         .bottom-nav {
@@ -230,11 +257,12 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: var(--primary-color);
+            background-color: #000;
+            border-top: 1px solid var(--primary-color);
             display: flex;
             justify-content: space-around;
-            padding: 15px 0;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            padding: 12px 0;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
             z-index: 999;
         }
 
@@ -242,24 +270,29 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #fff;
+            color: #fff; /* Keep icons white for clarity */
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
+            transition: color 0.3s;
         }
+        .nav-item:hover { color: var(--primary-color); }
 
         .nav-item i {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 5px;
+            color: var(--primary-color); /* Icons are gold */
         }
+        .nav-item:hover i { color: #fff; }
 
-        /* RSVP Form Styling */
+        /* RSVP Form Styling - Dark Mode */
         .rsvp-form {
             margin-top: 40px;
-            padding: 20px;
-            background-color: #fff;
+            padding: 25px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
@@ -268,49 +301,62 @@
         .rsvp-form h3 {
             text-align: center;
             font-family: 'Lora', serif;
-            color: var(--text-color);
+            color: var(--primary-color);
+            margin-top: 0;
         }
         .form-group {
             margin-bottom: 15px;
         }
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 500;
+            color: var(--primary-color);
+            font-size: 0.9rem;
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
+            padding: 12px;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            background-color: var(--input-bg);
+            color: #fff;
+            outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
         }
         .form-group textarea {
             resize: vertical;
             min-height: 80px;
         }
         .form-group input:disabled {
-            background-color: #f2f2f2;
+            background-color: #111;
+            color: #555;
             cursor: not-allowed;
         }
         .form-group button {
             width: 100%;
             padding: 12px;
             background-color: var(--primary-color);
-            color: white;
+            color: #000;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
         }
         .form-group button:hover {
-            background-color: #b18f5a;
+            background-color: #fff;
+            transform: translateY(-2px);
         }
         .form-group button:disabled {
-            background-color: #ccc;
+            background-color: #555;
             cursor: wait;
         }
         .success-message, .error-message {
@@ -321,28 +367,29 @@
             border-radius: 5px;
         }
         .success-message {
-            color: #2e7d32;
-            border: 1px solid #2e7d32;
-            background-color: #e8f5e9;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+            background-color: rgba(76, 175, 80, 0.1);
         }
         .error-message {
-            color: #c62828;
-            border: 1px solid #c62828;
-            background-color: #ffebee;
+            color: #ff5252;
+            border: 1px solid #ff5252;
+            background-color: rgba(255, 82, 82, 0.1);
         }
 
-        /* Wishes (Ucapan) Section Styling */
+        /* Wishes (Ucapan) Section Styling - Dark Mode */
         .wishes-container {
             max-width: 500px;
             margin: 40px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
         .wish-item {
-            border-bottom: 1px solid #eee;
-            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            padding: 15px 0;
             text-align: left;
         }
         .wish-item:last-child {
@@ -352,15 +399,16 @@
             font-weight: bold;
             color: var(--primary-color);
             margin-bottom: 5px;
+            font-size: 0.95rem;
         }
         .wish-item .wish-text {
             font-style: italic;
-            color: #555;
+            color: #ccc;
             line-height: 1.6;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
-        /* Modal (popup) styling */
+        /* Modal (popup) styling - Dark Mode */
         .modal {
             display: none;
             position: fixed;
@@ -370,39 +418,45 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.85); /* Darker overlay */
             animation: fadeIn 0.3s;
+            backdrop-filter: blur(3px);
         }
         .modal-content {
-            background-color: #fefefe;
+            background-color: var(--card-bg);
             margin: 40% auto;
-            padding: 25px;
-            border: 1px solid #888;
+            padding: 30px 25px;
+            border: 1px solid var(--primary-color);
             width: 80%;
             max-width: 400px;
-            border-radius: 10px;
+            border-radius: 15px;
             position: relative;
             text-align: center;
             font-family: 'Poppins', sans-serif;
             animation: slideIn 0.4s;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
         }
         .modal-content h2 {
             font-family: 'Lora', serif;
-            color: var(--text-color);
+            color: var(--primary-color);
             margin-top: 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
         }
-        .contact-person p { margin: 5px 0; }
-        .contact-person a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+        .modal-content p { color: #eee; }
+        .contact-person p { margin: 10px 0; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .contact-person a { color: #fff; text-decoration: none; font-weight: bold; }
         .close-button {
-            color: #aaa;
+            color: #777;
             position: absolute;
             top: 10px;
             right: 20px;
             font-size: 28px;
             font-weight: bold;
+            transition: color 0.3s;
         }
         .close-button:hover, .close-button:focus {
-            color: black;
+            color: var(--primary-color);
             text-decoration: none;
             cursor: pointer;
         }
@@ -411,15 +465,18 @@
             align-items: center;
             justify-content: center;
             background-color: var(--primary-color);
-            color: white;
+            color: #000;
             padding: 12px 20px;
-            margin: 10px 0;
+            margin: 15px 0;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .action-buttons a:hover { background-color: #b18f5a; }
+        .action-buttons a:hover { 
+            background-color: #fff; 
+            color: #000;
+        }
         .action-buttons a i { margin-right: 10px; font-size: 1.2rem; }
 
         @keyframes fadeIn {
@@ -434,7 +491,7 @@
     
     <canvas id="particle-canvas"></canvas>
 
-    <img src="izzahpaloh.png" alt="Wedding Itinerary" class="header-image fade-in-element" onerror="this.style.display='none'">
+    <img src="izzahpaloh.png" alt="Wedding Banner" class="header-image fade-in-element" onerror="this.style.display='none'">
 
     <div class="invitation-container">
         <div class="bismillah fade-in-element">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
@@ -445,7 +502,6 @@
 
         <div class="couple-names fade-in-element">Qurrati Aina Binti Mohd Ariffin<br><span class="ampersand">&</span><br>Hisyamudin Bin Musa</div>
 
-        <!-- Countdown Timer -->
         <div id="countdown" class="countdown-container fade-in-element">
             <div class="countdown-item">
                 <span id="days">00</span>
@@ -467,11 +523,11 @@
 
         <div class="event-details fade-in-element">
             <div class="detail-item">
-                <h3>Tarikh & Masa</h3>
+                <h3>Tarikh</h3>
                 <p>23 Mac 2026 (Isnin)</p>
-                <p>bersamaan 03 Shawal 1447H</p>
+                <p style="color: var(--muted-text); font-size: 0.8rem;">bersamaan 03 Shawal 1447H</p>
             </div>
-			<div class="detail-item">
+            <div class="detail-item">
                 <h3>Masa</h3>
                 <p>11:00 Pagi - 4:00 Petang</p>
             </div>
@@ -482,17 +538,15 @@
             </div>
         </div>
         
-		<img src="aturcara.png" alt="Wedding Itinerary" class="header-image fade-in-element" onerror="this.style.display='none'">
-		
+        <img src="aturcara.png" alt="Wedding Itinerary" class="header-image fade-in-element" onerror="this.style.display='none'">
+        
         <div id="rsvp" class="rsvp-form fade-in-element">
-            <!-- This section will be populated by JavaScript -->
-        </div>
+            </div>
 
-        <!-- Wishes Display Section -->
         <div class="wishes-container fade-in-element">
-            <h2 class="section-title">Ucapan & Doa</h2>
+            <h2 class="section-title" style="font-size: 1.5rem; margin-top:0;">Ucapan & Doa</h2>
             <div id="wishes-list">
-                 <p>Loading wishes...</p>
+                 <p style="color: #777;">Loading wishes...</p>
             </div>
         </div>
 
@@ -505,7 +559,6 @@
         <a href="#rsvp" class="nav-item"><i class="fa-regular fa-envelope"></i><span>RSVP</span></a>
     </div>
 
-    <!-- Audio Player and Control Button -->
     <audio id="background-music" loop>
         <source src="izzah.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -518,7 +571,7 @@
             <span class="close-button" id="closeCalendar">×</span>
             <h2>Simpan Tarikh</h2>
             <p>23 March 2026</p>
-			<p>11:00 Pagi - 4:00 Petang</p>
+            <p>11:00 Pagi - 4:00 Petang</p>
             <div class="action-buttons">
                 <a id="appleCalendarLink" href="#" download="wedding_ainaa_mudin.ics"><i class="fab fa-apple"></i> Apple Calendar</a>
                 <a id="googleCalendarLink" href="#" target="_blank"><i class="fab fa-google"></i> Google Calendar</a>
@@ -530,7 +583,12 @@
         <div class="modal-content">
             <span class="close-button" id="closeContact">×</span>
             <h2>Hubungi Kami</h2>
-            <div class="contact-person"><p><strong>Keluarga Pengantin</strong></p><p>Ayah : <a href="tel:+60139662018">013-9662018</a></p><p>Ibu : <a href="tel:+601131304070">011-31304070</a></p><p>Aina : <a href="tel:+60199656991">019-9656991</a></p></div>
+            <div class="contact-person">
+                <p style="color:var(--primary-color);"><strong>Keluarga Pengantin</strong></p>
+                <p>Ayah : <a href="tel:+60139662018">013-9662018</a></p>
+                <p>Ibu : <a href="tel:+601131304070">011-31304070</a></p>
+                <p>Aina : <a href="tel:+60199656991">019-9656991</a></p>
+            </div>
         </div>
     </div>
 
@@ -540,8 +598,7 @@
             <h2>Lokasi Majlis</h2>
             <p>Balairaya Kg Mengabang Tengah Hilir Batu Buruk, 20400 Kuala Terengganu, Terengganu</p>
             <div class="action-buttons">
-                <!-- UPDATED: New Google Maps and Waze links -->
-                <a href="https://www.google.com/maps/search/?api=1&query=5.307860,103.157121" target="_blank"><i class="fas fa-map-marked-alt"></i> Google Maps</a>
+                <a href="https://maps.google.com/?q=Balairaya+Kg+Mengabang+Tengah+Hilir+Batu+Buruk" target="_blank"><i class="fas fa-map-marked-alt"></i> Google Maps</a>
                 <a href="waze://?ll=5.307860,103.157121&navigate=yes" target="_blank"><i class="fab fa-waze"></i> Waze</a>
             </div>
         </div>
@@ -550,7 +607,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             
-            // --- Particle Effect ---
+            // --- Particle Effect (UPDATED FOR GOLD) ---
             const canvas = document.getElementById('particle-canvas');
             const ctx = canvas.getContext('2d');
             let particlesArray;
@@ -559,14 +616,15 @@
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 particlesArray = [];
-                const numberOfParticles = (canvas.height * canvas.width) / 9000;
+                const numberOfParticles = (canvas.height * canvas.width) / 10000;
                 for (let i = 0; i < numberOfParticles; i++) {
                     let size = (Math.random() * 2) + 1;
                     let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
                     let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
                     let directionX = (Math.random() * .4) - .2;
                     let directionY = (Math.random() * .4) - .2;
-                    let color = 'rgba(193, 163, 111, 0.5)'; // Particle color to match new theme
+                    // CHANGED: Color is now Gold/Yellow with opacity
+                    let color = 'rgba(212, 175, 55, 0.6)'; 
                     particlesArray.push({x, y, directionX, directionY, size, color});
                 }
             }
@@ -614,7 +672,7 @@
 
                     if (distance < 0) {
                         clearInterval(interval);
-                        document.getElementById("countdown").innerHTML = "<h3>The day is here!</h3>";
+                        document.getElementById("countdown").innerHTML = "<h3 style='color:var(--primary-color)'>Selamat Pengantin Baru!</h3>";
                     }
                 }, 1000);
             }
@@ -725,24 +783,24 @@
                             wishesListContainer.appendChild(wishItem);
                         });
                     } else {
-                        wishesListContainer.innerHTML = "<p>Tiada ucapan lagi. Jadilah yang pertama!</p>";
+                        wishesListContainer.innerHTML = "<p style='color:#777;'>Tiada ucapan lagi. Jadilah yang pertama!</p>";
                     }
                 } catch (error) {
                     console.error('Error fetching wishes:', error);
-                    wishesListContainer.innerHTML = "<p>Could not load wishes at this time.</p>";
+                    wishesListContainer.innerHTML = "<p style='color:#777;'>Unable to load wishes.</p>";
                 }
             }
 
             function displayRsvpForm() {
                 rsvpContainer.innerHTML = `
-                    <h3>Pengesahan Kehadiran & Ucapan</h3>
+                    <h3>Pengesahan Kehadiran</h3>
                     <div id="form-message"></div>
                     <form id="rsvp-form">
-                        <div class="form-group"><label for="name">Nama Penuh</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="name">Nama Penuh</label><input type="text" id="name" name="name" required placeholder="Nama Anda"></div>
                         <div class="form-group"><label for="attendance">Kehadiran</label><select id="attendance" name="attendance" required><option value="">-- Sila Pilih --</option><option value="Hadir">Hadir</option><option value="Tidak Hadir">Tidak Hadir</option></select></div>
-                        <div class="form-group"><label for="guests">Bilangan Tetamu (Termasuk Anda)</label><input type="number" id="guests" name="guests" min="1" value="1" required></div>
+                        <div class="form-group"><label for="guests">Bilangan Tetamu</label><input type="number" id="guests" name="guests" min="1" value="1" required></div>
                         <div class="form-group"><label for="ucapan">Ucapan & Doa</label><textarea id="ucapan" name="ucapan" placeholder="Tinggalkan ucapan anda di sini..."></textarea></div>
-                        <div class="form-group"><button type="submit" id="submit-button">Hantar</button></div>
+                        <div class="form-group"><button type="submit" id="submit-button">Hantar RSVP</button></div>
                     </form>
                 `;
                 
@@ -781,7 +839,7 @@
                     if (!formData.name || !formData.attendance) {
                         formMessage.innerHTML = `<p class="error-message">Sila isi semua ruangan yang diperlukan.</p>`;
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Hantar';
+                        submitButton.textContent = 'Hantar RSVP';
                         return;
                     }
 
@@ -801,9 +859,9 @@
                         }
                     } catch (error) {
                         console.error('Submission failed:', error);
-                        formMessage.innerHTML = `<p class="error-message">Maaf, terdapat ralat semasa menghantar RSVP anda. Sila cuba lagi.</p>`;
+                        formMessage.innerHTML = `<p class="error-message">Maaf, terdapat ralat. Sila cuba lagi nanti.</p>`;
                         submitButton.disabled = false;
-                        submitButton.textContent = 'Hantar';
+                        submitButton.textContent = 'Hantar RSVP';
                     }
                 });
             }
@@ -841,6 +899,3 @@
     </script>
 </body>
 </html>
-
-
-
